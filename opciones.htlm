@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opciones</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2em;
+        }
+        .option {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .option:hover {
+            transform: scale(1.1);
+        }
+        .btn {
+            background-color: #ff9999;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .btn:hover {
+            background-color: #ff6666;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="options">
+            <div class="option" onclick="openModal('tulipanes')">🌷</div>
+            <div class="option" onclick="openModal('corazon')">❤️</div>
+            <div class="option" onclick="openModal('luna')">🌙</div>
+        </div>
+        <button class="btn" onclick="finalPage()">Continuar</button>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    <script>
+        function openModal(option) {
+            let modal = document.getElementById('modal');
+            let content = document.getElementById('modalContent');
+            modal.style.display = "block";
+            
+            if (option === 'tulipanes') {
+                content.innerHTML = `
+                    <h2>Carta para ti</h2>
+                    <textarea style="width: 100%; height: 150px; margin-bottom: 1em;"></textarea>
+                    <input type="file" accept="image/*">
+                `;
+            } else if (option === 'corazon') {
+                content.innerHTML = `
+                    <h2 onclick="showCounter()">How long we are together</h2>
+                    <div id="counter"></div>
+                    <input type="file" accept="image/*">
+                `;
+            } else if (option === 'luna') {
+                content.innerHTML = `
+                    <h2>Mis pensamientos para ti</h2>
+                    <textarea style="width: 100%; height: 150px;"></textarea>
+                `;
+            }
+        }
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+        function showCounter() {
+            let startDate = new Date('2024-08-13');
+            let now = new Date();
+            let diff = now - startDate;
+            let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('counter').innerHTML = `${days} días, ${hours} horas, ${minutes} minutos`;
+        }
+        function finalPage() {
+            alert("It is the end, I love you with all my heart, I want a future on your side");
+        }
+    </script>
+</body>
+</html>
